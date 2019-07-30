@@ -1,0 +1,65 @@
+// Adding Event Handlers
+var eventhandler = {
+    {?configs.eh_ps.checked}
+    onPaymentSuccess: function (txnRecord) {
+        alert('success');
+    },
+    {/configs.eh_ps.checked}
+    {?configs.eh_pf.checked}
+    onPaymentFailure: function (err) {
+        alert('failed with ' + err);
+    },
+    {/configs.eh_pf.checked}
+}
+
+// Creating Identity
+var identity = pphwebsdk.Identity.create('@access_token')
+                        .environment('@environment')
+                        .refreshUrl('@refreshUrl');
+
+
+// Creating Payment Configuration
+var payment_config = pphwebsdk.PaymentConfiguration.create();
+
+// Subscribing Events
+payment_config.subscribeEvents(eventhandler);
+
+{?configs.as_fakeapi.checked}
+// Configure for Fake Server
+payment_config.useFakeAPIServer();
+{/configs.as_fakeapi.checked}
+
+{?configs.skipReceipt.checked}
+// Configure for Skip Receipt
+payment_config.tag('skipReceipt');
+{/configs.skipReceipt.checked}
+
+{?configs.vaultOnly.checked}
+// Configure the provider
+payment_config
+    .vault(pphwebsdk.Types.VaultProvider.BRAINTREE);
+    .customerId('@customer_id').done();
+{/configs.vaultOnly.checked}
+
+// Create Order
+var order = pphwebsdk.Order.create();
+order.item('Test Item').price(@amount).quantity(1);
+order.tip(@tip);
+
+//Making Payments
+var payment = pphwebsdk.Payment
+        .create(identity, payment_config)
+        .for(order)
+        {?configs.pt_card.checked}
+        .as(pphwebsdk.Types.PaymentMethod.CARD)
+        {/configs.pt_card.checked}
+        {?configs.pt_keyin.checked}
+        .as(pphwebsdk.Types.PaymentMethod.KEYIN)
+        {/configs.pt_keyin.checked}
+        {?configs.pt_check.checked}
+        .as(pphwebsdk.Types.PaymentMethod.CHECK)
+        {/configs.pt_check.checked}
+        {?configs.pt_cash.checked}
+        .as(pphwebsdk.Types.PaymentMethod.CARD)
+        {/configs.pt_cash.checked}
+        .sale();

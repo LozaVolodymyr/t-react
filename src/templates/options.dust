@@ -1,0 +1,13 @@
+<div class="panel panel-default" style="height:96%">
+    <div class="panel-heading">Options</div>
+    <div class="panel-body" style="height:98%; overflow-y: scroll">
+    <h4>Basic</h4>
+        Testing
+    {@iter for=configs}
+        <div class="checkbox">
+                <label><input id='{value.id}' type="checkbox"  onclick="CodeGen('{value.id}')">{value.text}</label>
+        </div>
+    {/iter}
+
+    </div>
+</div>

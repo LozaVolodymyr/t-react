@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Preload font files for better performance -->
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://www.paypalobjects.com/digitalassets/c/paypal-ui/fonts/PayPalSansSmall-Regular.woff2" />
+    <link rel="preload" as="font" type="font/woff2" crossorigin href="https://www.paypalobjects.com/digitalassets/c/paypal-ui/fonts/PayPalSansBig-Light.woff2" />
+
+    <!-- Font and normalizer necessary for the whole library -->
+    <link rel="stylesheet" href="https://www.paypalobjects.com/digitalassets/c/paypal-ui/web/fonts-and-normalize/0-0-8/fonts-and-normalize.min.css" />
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/dustjs-linkedin/2.7.5/dust-full.min.js'></script>
+    <script src='https://localhost:5001/pph/js/pphwebsdk.min.js'></script>
+    <script src='/generated.js'></script>
+    <script>dust.helpers.iter = function(chunk, context, bodies, params) {
+      var obj = params['for'] || context.current();
+
+      for (var k in obj) {
+        chunk = chunk.render(bodies.block, context.push({key: k, value: obj[k]}));
+      }
+      return chunk;
+    };
+    configs = {
+      testMode: {id: 'testMode', text: 'Test Mode'},
+      skipReceipt: {id: 'skipReceipt', text: 'Skip Receipt'},
+      vaultOnly: {id: 'vaultOnly', text: 'Vault Only'},
+      vap: {id: 'vap', text: 'Vault And Pay'},
+      rs: {id: 'rs', text: 'Reader Simulator', heading: true},
+      rs_swipe: {id: 'rs_swipe', text: 'Swipe'},
+      rs_chip: {id: 'rs_chip', text: 'Chip'},
+      rs_cl: {id: 'rs_cl', text: 'Contact Less'},
+      as: {id: 'as', text: 'API Simulator', heading: true},
+      as_fakeapi: {id: 'as_fakeapi', text: 'Fake API Response'},
+      eh: {id: 'eh', text: 'Event Handlers', heading: true},
+      eh_ps: {id: 'eh_ps', text: 'onPaymentSuccess'},
+      eh_pf: {id: 'eh_pf', text: 'onPaymentFailure'},
+      pt: {id: 'pt', text: 'Payment Types', heading: true},
+      pt_card: {id: 'pt_card', text: 'Card', checked: true},
+      pt_keyin: {id: 'pt_keyin', text: 'Key In'},
+      pt_check: {id: 'pt_check', text: 'Check'},
+      pt_cash: {id: 'pt_cash', text: 'Cash'},
+    };
+    function CodeGen(id) {
+      if(id) {
+        configs[id].checked = document.getElementById(id).checked;
+      }
+      generateAndDisplayCode();
+    }
+    function CodeGenDropDown(id) {
+      console.log(document.getElementById(id).value);
+      configs[document.getElementById(id).value].checked = true;
+      generateAndDisplayCode();
+    }
+
+    function generateAndDisplayCode(){
+      dust.render("code", {
+        configs: configs
+      }, function(err, out) {
+        if(err) console.log(err);
+        window.document.getElementById('code').innerHTML = '<pre><code class="javascript">'+ out + '</code></pre>';
+      });
+    }
+    </script>
+    <title>React Starter</title>
+</head>
+
+<body>
+<div id="root"></div>
+<noscript>
+    You need to enable JavaScript to run this app.
+</noscript>
+<script src="../dist/bundle.js"></script>
+</body>
+
+</html>

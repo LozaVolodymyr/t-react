@@ -1,0 +1,73 @@
+.App {
+    margin: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.ppRow {
+}
+.ppContainer {
+    padding: 0 0;
+    max-width: 100%;
+}
+
+.ppBordered {
+    border: black solid;
+    height: 100vh;
+}
+.ppSidebar {
+    background-image: linear-gradient(to bottom, #006EB8, #003188);
+    height: 100vh;
+}
+
+.pp-link:hover {
+    cursor: pointer;
+    color: white;
+    font-weight: bolder;
+}
+
+.pp-link {
+    padding-left: 1rem;
+    color: whitesmoke;
+}
+
+.pp-link:not(:hover) {
+    color: whitesmoke;
+    font-weight: normal;
+}
+
+.pp-link__done {
+    padding-left: 1rem;
+    color: lawngreen;
+    font-weight: bolder;
+    cursor: not-allowed;
+}
+
+.pp-link__err {
+    padding-left: 1rem;
+    color: lightcoral;
+}
+
+.pp-icon {
+    padding: 1rem;
+}
+
+.pp-title {
+    color: black;
+}
+
+.pp-code-container {
+    border: black solid;
+    height: 100vh;
+    padding: 0 0;
+}
+
+.pp-code {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+    background: #1E1E1E;
+    color: #DCDCDC;
+    height: 100vh;
+}
+
+pre {-moz-tab-size: 4;} /* Firefox */
+pre {tab-size: 4;}
