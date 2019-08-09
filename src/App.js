@@ -107,6 +107,49 @@ class App extends Component{
             functionParam: 'err',
             alertText: '\'failed with\' + err',
           },
+          {
+            label: 'Merchant Init Success',
+            name: 'onMerchantInitializeSuccess',
+            id: 'eh_mis',
+            functionParam: 'merchant',
+            alertText: '\'merchant logged in!\'',
+          },
+          {
+            label: 'Merchant Init Failure',
+            name: 'onMerchantInitializeFailure',
+            id: 'eh_mif',
+            functionParam: 'err',
+            alertText: '\'Merchant Init failed with\' + err',
+          },
+          {
+            label: 'Reader Connection Success',
+            name: 'onConnectReaderSuccess',
+            id: 'eh_crs',
+            functionParam: 'reader',
+            alertText: '\'Connected with\' + reader',
+          },
+          {
+            label: 'Reader Connection Failure',
+            name: 'onConnectReaderFailure',
+            id: 'eh_crf',
+            functionParam: 'err',
+            alertText: '\'reader connection failed with\' + err',
+          },
+          {
+            label: 'No Devices Found',
+            name: 'NoDevicesFound',
+            id: 'eh_ndf',
+            functionParam: '',
+            alertText: '\'No Devices Found\'',
+          },
+        ],
+        orderOptions: [
+          {
+            key: 'amount', label: 'Choose item amount', value: '@amount',
+          },
+          {
+            key: 'tip', label: 'Choose tip for order', value: '@tip',
+          }
         ],
         selections:
           [
@@ -268,7 +311,6 @@ class App extends Component{
   }
 
   genFun(element, key) {
-    console.log(element.listItems?.find(element => element.key === key));
     if(element.key === key) {
         return {
           find: (element, index) => index === 0, filter: ((element, index) => index !== 0)
@@ -289,8 +331,6 @@ class App extends Component{
           if(element.key === key || element.listItems?.find(element => element.key === key))
           {
             element.classes.add('pp-sidebar-option-selected');
-            console.log(`listItems ${element.listItems}`);
-            console.log(self.genFun(element, key));
             element.listItems?.find(self.genFun(element, key)?.find).classes.add('pp-sidebar-option-selected');
             element.listItems?.filter(self.genFun(element, key)?.filter)?.map(element => element?.classes.delete('pp-sidebar-option-selected'))
           }
@@ -330,10 +370,20 @@ class App extends Component{
     }
   }
 
+  identityTextChange(event) {
+    this.setState({
+      identity: this.state.data.identity.map((element) => {
+        if(element.key === event.target.name) {
+          element.value = event.target.value;
+        }
+      }),
+    });
+    this.renderCode();
+  }
+
   renderIdentity() {
     const self = this;
-    return self.state.data.identity.map((element) => {
-      console.log(element);
+    return self.state.data.identity.map((element, index) => {
       return <Tile divider>
         <Tile.Content>
           <TextInput
@@ -341,9 +391,37 @@ class App extends Component{
             value={element.value}
             label={element.key}
             helperText={element.label}
-            rightIcon={<Icon size="xs" name="info-alt"
-            // onChange={self.renderCode()}
-            />}
+            rightIcon={<Icon size="xs" name="info-alt"/>}
+            onChange={self.identityTextChange.bind(self)}
+          />
+        </Tile.Content>
+      </Tile>
+    });
+  }
+
+  orderOptionsTextChange(event) {
+    this.setState({
+      orderOptions: this.state.data.orderOptions.map((element) => {
+        if(element.key === event.target.name) {
+          element.value = event.target.value;
+        }
+      })
+    });
+    this.renderCode();
+  }
+
+  renderOrderOptions() {
+    const self = this;
+    return self.state.data.orderOptions.map((element, index) => {
+      return <Tile divider>
+        <Tile.Content>
+          <TextInput
+            name={element.key}
+            value={element.value}
+            label={element.key}
+            helperText={element.label}
+            rightIcon={<Icon size="xs" name="info-alt"/>}
+            onChange={self.orderOptionsTextChange.bind(self)}
           />
         </Tile.Content>
       </Tile>
@@ -399,11 +477,9 @@ class App extends Component{
     this.setState({
       generatedJS: '// Adding Event Handlers\n' +
         'const eventhandler = {' +
-        `${self.state.data.selectionGroup.map((selection) => {
-          if(selection.checked) return `\n\t${selection.name}: function (${selection.functionParam}) {\n` +
+        `${self.state.data.selectionGroup.filter(selection => selection.checked)?.map((selection) => `\n\t${selection.name}: function (${selection.functionParam}) {\n` +
             `\t\talert(${selection.alertText});\n` +
-            '\t}';
-        }).join('')}\n` +
+            '\t}').join(',')}\n` +
         '};\n' + '\n' + '// Creating Identity\n' +
         `const identity = pphwebsdk.Identity.create('${self.state.data.identity.find((element => element.key === 'access_token'))?.value}')\n` +
         `\t\t\t\t.environment('${self.state.data.identity.find((element => element.key === 'environment'))?.value}')\n` +
@@ -416,8 +492,8 @@ class App extends Component{
           }
         }).join('')}` +
         '\n' + '// Create Order\n' +
-        'var order = pphwebsdk.Order.create();\n' + 'order.item(\"Test Item\").price(\"@amount\").quantity(1);\n' +
-        'order.tip(\"@tip\");\n' + '\n' + '//Making Payments\n' + 'var payment = pphwebsdk.Payment\n' +
+        'var order = pphwebsdk.Order.create();\n' + `order.item("Test Item\").price('${self.state.data.orderOptions.find((element => element.key === 'amount'))?.value}').quantity(1);\n` +
+        `order.tip('${self.state.data.orderOptions.find((element => element.key === 'tip'))?.value}');\n` + '\n' + '//Making Payments\n' + 'var payment = pphwebsdk.Payment\n' +
         '        .create(identity, payment_config)\n' + '        .for(order)\n' +
         `${self.getPaymentTypeCode(self.state)}` + '        .sale();\n'
     });
@@ -428,7 +504,6 @@ class App extends Component{
     s.type = 'text/javascript';
     s.async = true;
     s.innerHTML = `(function (){${this.state.generatedJS}})();`;
-    console.log(document.getElementsByTagName('head')[0]);
     document.getElementsByTagName('head')[0].appendChild(s);
   }
 
@@ -451,7 +526,7 @@ class App extends Component{
           <Col className={'ppSidebar'} sm={2}>
             {self.genSidebar(self.state.data.sidebar)}
           </Col>
-          <Col className={'ppBordered'}>
+          <Col className={'ppBordered'} md={4}>
             <div id={'initialSetup'} hidden>
               <Tile divider>
                 <Tile.Header size={'xl2'}>Setting up PPH Web SDK</Tile.Header>
@@ -461,7 +536,7 @@ class App extends Component{
                   </Text>
                 </Tile.Content>
                 <Tile.Footer>
-                  <Button size="lg" id={'setupButton'} className={'pp-link'} onClick={self.setupPPH}>Setup PPH</Button>
+                  <Button size="lg" id={'setupButton'} className={'pp-link'} onClick={(event) => {console.log('inside click');console.log(this);console.log(self);self.setupPPH(event)}}>Setup PPH</Button>
                 </Tile.Footer>
               </Tile>
             </div>
@@ -472,6 +547,7 @@ class App extends Component{
               <div id={'paymentOptions'} hidden>
                 {self.renderDropdown()}
                 {self.renderCheckboxes()}
+                {self.renderOrderOptions()}
               </div>
               <div id={'eventHandlers'} hidden>
                 {self.renderSelectionGroup()}

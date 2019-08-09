@@ -26,6 +26,7 @@
 .ppBordered {
     border: black solid;
     height: fit-content;
+    overflow: scroll;
 }
 .ppSidebar {
     background-image: linear-gradient(to bottom, #006EB8, #003188);
@@ -74,11 +75,15 @@
     border: black solid;
     height: 100vh;
     padding: 0 0;
+    overflow: scroll;
 }
-
+.ppvx_selection-group__buttons--justify {
+    display: flex;
+    flex-wrap: wrap;
+}
 .pp-code {
     display: block;
-    overflow-x: auto;
+    overflow-x: scroll;
     padding: 0.5em;
     background: #1E1E1E;
     color: #DCDCDC;
