@@ -1,21 +1,36 @@
 .App {
     margin: 1rem;
-    font-family: Arial, Helvetica, sans-serif;
 }
 .ppRow {
+    height: fit-content;
 }
+
+.pp-right-align {
+    justify-content: right;
+    text-align: right;
+}
+
 .ppContainer {
     padding: 0 0;
     max-width: 100%;
 }
 
+.pp-list {
+    list-style-type: none;
+    /*padding-left: unset;*/
+}
+.pp-sidebar-option-selected {
+    background: rgba(0,156,222,.8);
+}
+
 .ppBordered {
     border: black solid;
-    height: 100vh;
+    height: fit-content;
 }
 .ppSidebar {
     background-image: linear-gradient(to bottom, #006EB8, #003188);
     height: 100vh;
+    color: #FFFFFF;
 }
 
 .pp-link:hover {
@@ -52,6 +67,7 @@
 
 .pp-title {
     color: black;
+    text-align: center;
 }
 
 .pp-code-container {

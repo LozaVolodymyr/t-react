@@ -1,13 +1,64 @@
 import React, { Component} from "react";
 import {hot} from "react-hot-loader";
 import "./App.css";
-import { Container, Row, Col, Text, Icon, Checkbox, MultiSelectionGroup, Dropdown, Tile, Button } from 'pp-react';
+import { Container, Row, Col, Text, Icon, Checkbox, MultiSelectionGroup, Dropdown, Tile, Button, TextInput } from 'pp-react';
 
 class App extends Component{
   constructor (props) {
     super(props);
     this.state = {
       data: {
+        sidebar: [
+          {
+            key: 'SB_initialSetup',
+            text: 'Setup PPH',
+            classes: new Set(['pp-sidebar-option', 'pp-link']),
+            selected: false,
+          },
+          {
+            key: 'SB_paymentSteps',
+            text: 'Take a Payment',
+            classes: new Set(['pp-sidebar-option', 'pp-link']),
+            selected: false,
+            listItems: [
+              {
+                key: 'SB_identityInfo',
+                text: 'Merchant Identity',
+                classes: new Set(['pp-sidebar-option', 'pp-link']),
+                selected: false,
+              },
+              {
+                key: 'SB_paymentOptions',
+                text: 'Payment Options',
+                classes: new Set(['pp-sidebar-option', 'pp-link']),
+                selected: false,
+              },
+              {
+                key: 'SB_eventHandlers',
+                text: 'Subscribe Events',
+                classes: new Set(['pp-sidebar-option', 'pp-link']),
+                selected: false,
+              },
+            ]
+          },
+        ],
+        identity: [
+          {
+            key: 'environment', label: 'Select environment to run on', value: 'fake',
+          },
+          {
+            key: 'access_token', label: 'Access token to authorize payments with', value: '@access_token',
+          },
+          {
+            key: 'client_id', label: 'Client ID to authorize payments with', value: '@client_id',
+          },
+          {
+            key: 'client_secret', label: 'Client Secret to authorize payments with', value: '@client_secret',
+          },
+          {
+            key: 'refresh_url', label: 'Refresh url to refresh access token on expiry', value: '@refresh_url',
+          },
+        ],
         checkboxes:
           [
             {
@@ -59,7 +110,7 @@ class App extends Component{
         ],
         selections:
           [
-            {
+            /*{
               id: 'vaultingOptions',
               label: 'Vault Options', placeholder: 'Enable vaulting', helperText: 'Choose which vault option to enable',
               options: [
@@ -69,33 +120,35 @@ class App extends Component{
                   label: 'Vault and Pay', value: 'vap',
                 }
               ],
-            }, {
-            id: 'simulatorOptions',
-            label: 'Reader Simulator', placeholder: 'Pick mock reader', helperText: 'Choose which reader to mock',
-            options: [
-              {
-                label: 'Swipe', value: 'rs_swipe', checked: true,
-              }, {
-                label: 'Chip', value: 'rs_chip', checked: true,
-              }, {
-                label: 'Contact Less', value: 'rs_cl', checked: true,
-              }
-            ],
-          }, {
-            id: 'paymentType',
-            label: 'Payment Types', helperText: 'Choose the payment type',
-            options: [
-              {
-                label: 'Card', value: 'pt_card', text: 'CARD',
-              }, {
-                label: 'Key In', value: 'pt_keyin', text: 'KEYIN',
-              }, {
-                label: 'Check', value: 'pt_check', text: 'CHECK',
-              }, {
-                label: 'Cash', value: 'pt_cash', text: 'CASH',
-              }
-            ],
-          },
+            },*/
+            /*{
+              id: 'simulatorOptions',
+              label: 'Reader Simulator', placeholder: 'Pick mock reader', helperText: 'Choose which reader to mock',
+              options: [
+                {
+                  label: 'Swipe', value: 'rs_swipe', checked: true,
+                }, {
+                  label: 'Chip', value: 'rs_chip', checked: true,
+                }, {
+                  label: 'Contact Less', value: 'rs_cl', checked: true,
+                }
+              ],
+            },*/
+            {
+              id: 'paymentType',
+              label: 'Payment Types', helperText: 'Choose the payment type',
+              options: [
+                {
+                  label: 'Card', value: 'pt_card', text: 'CARD',
+                }, {
+                  label: 'Key In', value: 'pt_keyin', text: 'KEYIN',
+                }, {
+                  label: 'Check', value: 'pt_check', text: 'CHECK',
+                }, {
+                  label: 'Cash', value: 'pt_cash', text: 'CASH',
+                }
+              ],
+            },
           ]
       },
       generatedJS: 'empty'
@@ -107,6 +160,9 @@ class App extends Component{
     this.showTransactionSteps = this.showTransactionSteps.bind(this);
     this.renderCode = this.renderCode.bind(this);
     this.runCode = this.runCode.bind(this);
+    this.genSidebar = this.genSidebar.bind(this);
+    this.handleSidebarClick = this.handleSidebarClick.bind(this);
+    this.renderIdentity = this.renderIdentity.bind(this);
   }
 
   onCheckboxChange(event) {
@@ -133,27 +189,36 @@ class App extends Component{
   renderCheckboxes() {
     const self = this;
     const {checkboxes} = this.state.data;
-    return checkboxes
-    .map((checkbox, index) => <Checkbox
-      key={index}
-      label={checkbox.text}
-      name={checkbox.id}
-      id={checkbox.id}
-      onChange={self.onCheckboxChange.bind(self)} />
-    );
+    return <Tile divider>
+      <Tile.Header size={'xl2'}>Payment Options</Tile.Header>
+      <Tile.Content>
+        {checkboxes
+        .map((checkbox, index) => <Checkbox
+        key={index}
+        label={checkbox.text}
+        name={checkbox.id}
+        id={checkbox.id}
+        onChange={self.onCheckboxChange.bind(self)} />
+        )}
+      </Tile.Content>
+    </Tile>;
   }
 
   renderDropdown() {
     const self = this;
-    return this.state.data.selections.map((dropdownOptions, index) => <Dropdown
-      label={dropdownOptions.label}
-      helperText={dropdownOptions.helperText}
-      placeholder=""
-      id={dropdownOptions.id}
-      options={dropdownOptions.options}
-      value={dropdownOptions.value}
-      onChange={self.callCodeGenDropdown.bind(self)}
-      />
+    return this.state.data.selections.map((dropdownOptions, index) => <Tile divider>
+      <Tile.Header size={'xl2'}>{dropdownOptions.helperText}</Tile.Header>
+      <Tile.Content>
+        <Dropdown
+          label={dropdownOptions.label}
+          placeholder=""
+          id={dropdownOptions.id}
+          options={dropdownOptions.options}
+          value={dropdownOptions.value}
+          onChange={self.callCodeGenDropdown.bind(self)}
+        />
+      </Tile.Content>
+    </Tile>
     );
   }
 
@@ -183,17 +248,7 @@ class App extends Component{
     />
   }
 
-  loadPPHScript() {
-    const script = document.createElement("script");
-
-    script.src = "https://localhost:5001/pph/js/pphwebsdk.min.js";
-    script.async = true;
-
-    document.body.appendChild(script);
-  }
-
   setupPPH() {
-    this.loadPPHScript();
     setTimeout(() => {
       try {
         pphwebsdk.Setup.isSetupComplete().then(function () {
@@ -210,6 +265,99 @@ class App extends Component{
         document.getElementById('setupButton').classList.add('pp-link__err');
       }
     }, 500);
+  }
+
+  genFun(element, key) {
+    console.log(element.listItems?.find(element => element.key === key));
+    if(element.key === key) {
+        return {
+          find: (element, index) => index === 0, filter: ((element, index) => index !== 0)
+        };
+    }
+    else if (element.listItems?.find(element => element.key === key)) {
+        return {
+          find: element => element.key === key, filter: element => element.key !== key
+        };
+    }
+  }
+
+  handleSidebarClick(key) {
+    const self = this;
+    this.setState({
+      sidebar: self.state.data.sidebar.map(
+        (element) => {
+          if(element.key === key || element.listItems?.find(element => element.key === key))
+          {
+            element.classes.add('pp-sidebar-option-selected');
+            console.log(`listItems ${element.listItems}`);
+            console.log(self.genFun(element, key));
+            element.listItems?.find(self.genFun(element, key)?.find).classes.add('pp-sidebar-option-selected');
+            element.listItems?.filter(self.genFun(element, key)?.filter)?.map(element => element?.classes.delete('pp-sidebar-option-selected'))
+          }
+          else
+          {
+            element.classes.delete('pp-sidebar-option-selected');
+            element.listItems?.map(element => element.classes.delete('pp-sidebar-option-selected'))
+          }
+        }
+      ),
+    });
+    switch (key) {
+      case 'SB_initialSetup':
+        this.showSetup();
+        break;
+      case 'SB_paymentSteps':
+      case 'SB_paymentOptions':
+        document.getElementById('paymentOptions').style.display = 'block';
+        document.getElementById('eventHandlers').style.display = 'none';
+        document.getElementById('merchantIdentity').style.display = 'none';
+        this.showTransactionSteps();
+        break;
+      case 'SB_eventHandlers':
+        document.getElementById('paymentOptions').style.display = 'none';
+        document.getElementById('merchantIdentity').style.display = 'none';
+        document.getElementById('eventHandlers').style.display = 'block';
+        this.showTransactionSteps();
+        break;
+      case 'SB_identityInfo':
+        document.getElementById('paymentOptions').style.display = 'none';
+        document.getElementById('eventHandlers').style.display = 'none';
+        document.getElementById('merchantIdentity').style.display = 'block';
+        this.showTransactionSteps();
+        break;
+      default:
+        break;
+    }
+  }
+
+  renderIdentity() {
+    const self = this;
+    return self.state.data.identity.map((element) => {
+      console.log(element);
+      return <Tile divider>
+        <Tile.Content>
+          <TextInput
+            name={element.key}
+            value={element.value}
+            label={element.key}
+            helperText={element.label}
+            rightIcon={<Icon size="xs" name="info-alt"
+            // onChange={self.renderCode()}
+            />}
+          />
+        </Tile.Content>
+      </Tile>
+    });
+  }
+
+  genSidebar(sidebarElements) {
+    return sidebarElements ? <ul className={'pp-list'}>
+      {sidebarElements?.map((element, index) =>
+      <li key={element.key}>
+        <Text id={element.key} className={[...element.classes].join(' ')} size={'xl'} onClick={this.handleSidebarClick.bind(this, element.key)}>{element.text}</Text>
+        {this.genSidebar(element.listItems)}
+      </li>)}
+    </ul> : undefined
   }
 
   showSetup() {
@@ -252,15 +400,15 @@ class App extends Component{
       generatedJS: '// Adding Event Handlers\n' +
         'const eventhandler = {' +
         `${self.state.data.selectionGroup.map((selection) => {
-          if(selection.checked) return `\n\t${selection.name}: function (${selection.functionParam}) {\n` + 
+          if(selection.checked) return `\n\t${selection.name}: function (${selection.functionParam}) {\n` +
             `\t\talert(${selection.alertText});\n` +
             '\t}';
         }).join('')}\n` +
         '};\n' + '\n' + '// Creating Identity\n' +
-        'const identity = pphwebsdk.Identity.create(\'@access_token\')\n' +
-        '\t\t\t\t.environment(\'@environment\')\n' +
-        '\t\t\t\t.refreshUrl(\'@refreshUrl\');\n' + '\n' + '\n' +
-        '// Creating Payment Configuration\n' + 'var payment_config = pphwebsdk.PaymentConfiguration.create();\n' +
+        `const identity = pphwebsdk.Identity.create('${self.state.data.identity.find((element => element.key === 'access_token'))?.value}')\n` +
+        `\t\t\t\t.environment('${self.state.data.identity.find((element => element.key === 'environment'))?.value}')\n` +
+        `\t\t\t\t.refreshUrl('${self.state.data.identity.find((element => element.key === 'refresh_url'))?.value}');\n` + '\n' + '\n' +
+        '// Creating Payment Configuration\n' + 'const payment_config = pphwebsdk.PaymentConfiguration.create();\n' +
         '\n' + '// Subscribing Events\n' + 'payment_config.subscribeEvents(eventhandler);\n' + '\n' +
         `${self.state.data.checkboxes.map((checkbox) => {
           if(checkbox.checked) {
@@ -273,7 +421,6 @@ class App extends Component{
         '        .create(identity, payment_config)\n' + '        .for(order)\n' +
         `${self.getPaymentTypeCode(self.state)}` + '        .sale();\n'
     });
-    this.forceUpdate();
   }
 
   runCode() {
@@ -290,23 +437,19 @@ class App extends Component{
     return(
       <Container fluid={true} className={'ppContainer'}>
         <Row className={'ppRow'} >
-          <Col>
+          <Col md={2}>
             <Icon size={'xl2'} name={'logo-paypal'} className={'pp-title pp-icon'} as={'div'} />
           </Col>
-          <Col>
-            <Text size={'xl2'} className={'pp-title'}>PayPal Here SDK Sample App</Text>
+          <Col style={{'textAlign': 'center'}}>
+            <Text size={'xl2'} className={'pp-title'} medium>PayPal Here SDK Sample App</Text>
+          </Col>
+          <Col className={'pp-icon pp-right-align'} md={2}>
+            {/*<Button onClick={self.showLoginModal}>Log In With PayPal</Button>*/}
           </Col>
         </Row>
         <Row className={'ppBordered'}>
-          <Col className={'ppSidebar'} md={2}>
-            <ul style={{'listStyleType':'none'}}>
-              <li key={'initialSetup'} onClick={self.showSetup}>
-                <Text size={'xl'} >Setup PPH</Text>
-              </li>
-              <li key={'paymentSteps'} onClick={self.showTransactionSteps}>
-                <Text size={'xl'} >Take A Payment</Text>
-              </li>
-            </ul>
+          <Col className={'ppSidebar'} sm={2}>
+            {self.genSidebar(self.state.data.sidebar)}
           </Col>
           <Col className={'ppBordered'}>
             <div id={'initialSetup'} hidden>
@@ -323,10 +466,22 @@ class App extends Component{
               </Tile>
             </div>
             <div id={'paymentSteps'} hidden>
-            {self.renderDropdown()}
-            {self.renderCheckboxes()}
-            {self.renderSelectionGroup()}
-              <Button size={'lg'} id={'runCode'} className={'pp-link'} onClick={self.runCode}>Try It Out</Button>
+              <div id={'merchantIdentity'} hidden>
+                {self.renderIdentity()}
+              </div>
+              <div id={'paymentOptions'} hidden>
+                {self.renderDropdown()}
+                {self.renderCheckboxes()}
+              </div>
+              <div id={'eventHandlers'} hidden>
+                {self.renderSelectionGroup()}
+              </div>
+              <Tile card>
+                <Tile.Header size={'xl'}>Run the genrated to code</Tile.Header>
+                <Tile.Content>
+                  <Button size={'lg'} id={'runCode'} className={'pp-link'} onClick={self.runCode}>Try It Out</Button>
+                </Tile.Content>
+              </Tile>
             </div>
           </Col>
           <Col className={'pp-code-container'}>

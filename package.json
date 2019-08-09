@@ -14,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "lodash": "^4.17.15",
     "pp-react": "^4.2.3",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
