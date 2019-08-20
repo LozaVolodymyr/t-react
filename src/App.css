@@ -1,3 +1,8 @@
+html, body { height: 100%; }
+#root{
+    height: 100%;
+}
+
 .App {
     margin: 1rem;
 }
@@ -92,3 +97,88 @@
 
 pre {-moz-tab-size: 4;} /* Firefox */
 pre {tab-size: 4;}
+
+
+
+/* new styles */
+body {
+    color: black;
+  }
+  
+  .wrapper {
+    height: 100%;
+    display: table;
+    width: 100%;
+  }
+  
+  .header {
+    align-items: center;
+    background-color: #fff;
+    font-family: Helvetica, Arial, sans-serif;
+    height: 3.75rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    top: 0;
+    transition: all 0.15s ease-out;
+    width: 100%;
+    z-index: 10;
+    display: table-row;
+  }
+  
+  .main {
+    border-top: 1px solid #e4e4e4;
+    height: 100%;
+    display: table;
+    width: 100%;
+  }
+  
+  .box {
+    display: table-cell;
+  }
+  
+  .sidebar {
+    background: #009cde linear-gradient(167deg, #009cde, #003087 40rem);
+    bottom: 0;
+    font: 400 1rem Helvetica, Arial, sans-serif;
+    left: 0;
+    padding-top: 3.75rem;
+    top: 0;
+    width: 16rem;
+    height: 100%;
+  }
+  .sidebar-right {
+    background: black;
+    color: white;
+    bottom: 0;
+    font: 400 1rem Helvetica, Arial, sans-serif;
+    left: 0;
+    padding-top: 3.75rem;
+    top: 0;
+    width: 40rem;
+    height: 100%;
+  }
+  
+  .footer {
+    display: table-row;
+    height: 1px;
+  }
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    opacity: .7;
+    padding: 8px 16px;
+    text-decoration: none;
+  }
+  
+  /* Change the link color on hover */
+  li a:hover {
+    opacity: 1;
+    color: white;
+  }
