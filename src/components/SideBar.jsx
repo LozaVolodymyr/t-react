@@ -5,10 +5,10 @@ function SideBar() {
     return (
         <div className={'box sidebar'}>
             <ul>
-            { routs.map(({path, title}, index)=>{
-                return  <li key={index}><Link to={path}  className={'tip-nav'}> {title} </Link></li>
-            })
-            }
+                {routs.map(({ path, title }, index) => {
+                    return <li key={index}><Link to={path} className={'tip-nav'}> {title} </Link></li>
+                })
+                }
             </ul>
         </div>
     )
@@ -17,21 +17,25 @@ function SideBar() {
 
 const routs = [
     {
-    path: '/take-payments',
-    title: 'Take Payments'
-},
-{
-    path: '/merchant-indentity',
-    title: 'Merchant Indentity'
-},
-{
-    path: '/payment-options',
-    title: 'Payment Options'
-},
-{
-    path: '/subsribe-events',
-    title: 'Subsribe Events'
-}
+        path: '/',
+        title: 'Setup PPH'
+    },
+    {
+        path: '/take-payments',
+        title: 'Take Payments'
+    },
+    {
+        path: '/merchant-indentity',
+        title: 'Merchant Indentity'
+    },
+    {
+        path: '/payment-options',
+        title: 'Payment Options'
+    },
+    {
+        path: '/subsribe-events',
+        title: 'Subsribe Events'
+    }
 ]
 
 

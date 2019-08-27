@@ -7,20 +7,39 @@ import Options from '../pages/Options'
 import Events from '../pages/Events'
 import Payments from '../pages/Payments'
 
-function Content(props) {
-    return (
-        <div className={'box content'}>
-            <Switch>
-                <Route exact path='/' component={Setup} />
-                <Route path='/merchant-indentity' render={() => <Indentity identity={props.data.identity} />} />
-                <Route path='/take-payments' render={() => <Payments identity={props.data.identity} />} />
-                <Route path='/payment-options' render={() => <Options orderOptions={props.data.orderOptions} />} />
-                <Route path='/subsribe-events' render={() => <Events identity={props.data.identity} />} />
-                <Redirect to="/" />
-            </Switch>
+import view from '../data/view';
 
-        </div>
-    )
+class Content extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            view
+        };
+
+        this.updateView = this.updateView.bind(this);
+    }
+    updateView(event){
+        console.log('KEK', this.state)
+        this.setState({
+            view: view + "NEW CONTENT"
+        }, ()=> this.forceUpdate())
+    }
+
+    render(){
+        return (
+            <div className={'box content'}>
+                <Switch>
+                    <Route exact path='/' component={Setup} />
+                    <Route path='/merchant-indentity' render={() => <Indentity identity={this.props.data.identity} />} />
+                    <Route path='/take-payments' render={() => <Payments identity={this.props.data.identity} view={this.state.view} updateView={this.updateView} />} />
+                    <Route path='/payment-options' render={() => <Options orderOptions={this.props.data.orderOptions} />} />
+                    <Route path='/subsribe-events' render={() => <Events identity={this.props.data.identity} />} />
+                    <Redirect to="/" />
+                </Switch>
+            </div>
+        )
+    }
+    
 }
 
 

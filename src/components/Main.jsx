@@ -10,7 +10,6 @@ function Main(props) {
        <div className={'main'}>
           <SideBar />
           <Content data={props.data}/>
-          <View />
        </div>
     )
 }

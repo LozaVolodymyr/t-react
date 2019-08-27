@@ -135,13 +135,16 @@ body {
   .box {
     display: table-cell;
   }
+  .box-content {
+    width: 40%;
+    display: table-cell;
+  }
   
   .sidebar {
     background: #009cde linear-gradient(167deg, #009cde, #003087 40rem);
     bottom: 0;
     font: 400 1rem Helvetica, Arial, sans-serif;
     left: 0;
-    padding-top: 3.75rem;
     top: 0;
     width: 16rem;
     height: 100%;
@@ -149,13 +152,8 @@ body {
   .sidebar-right {
     background: black;
     color: white;
-    bottom: 0;
-    font: 400 1rem Helvetica, Arial, sans-serif;
-    left: 0;
-    padding-top: 3.75rem;
-    top: 0;
-    width: 40rem;
     height: 100%;
+    padding-top: 20px;
   }
   
   .footer {
