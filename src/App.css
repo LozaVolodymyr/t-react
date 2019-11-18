@@ -56,10 +56,10 @@ html, body { height: 100%; }
 }
 
 .pp-link__done {
-    padding-left: 1rem;
-    color: lawngreen;
-    font-weight: bolder;
-    cursor: not-allowed;
+    padding-left: 1rem !important;
+    color: lawngreen !important;
+    font-weight: bolder !important;
+    cursor: not-allowed !important;
 }
 
 .pp-link__err {
@@ -179,4 +179,12 @@ ul {
   li a:hover {
     opacity: 1;
     color: white;
+  }
+
+  .isDisabled {
+    color: currentColor;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+    pointer-events: none;
   }

@@ -6,11 +6,11 @@ import View from '../components/View'
 
 function Payments(props) {
   return (
-    <div className={'main'}>
-      <div className={'box-content'}>
+    <Row>
+      <Col className={'box-content'}>
         {props.identity.map((element, index) => {
-          return <Tile divider key={index}>
-            <Tile.Content>
+          return <Tile key={index}>
+            {/* <Tile.Content> */}
               <TextInput
                 name={element.key}
                 value={element.value}
@@ -19,15 +19,15 @@ function Payments(props) {
                 rightIcon={<Icon size="xs" name="info-alt" />}
               // onChange={self.identityTextChange.bind(self)}
               />
-            </Tile.Content>
+            {/* </Tile.Content> */}
           </Tile>
         })}
-        <button onClick={props.updateView}> ADD EVENT</button>
-      </div>
-      <div className={'sidebar-right'}>
-        <View view={props.view} />
-      </div>
-    </div>
+        <Button onClick={props.updateView}> ADD EVENT</Button>
+      </Col>
+      <Col>
+        <View view={props.view} /> 
+      </Col>
+    </Row>
   )
 }
 

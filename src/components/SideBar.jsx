@@ -1,16 +1,17 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import { Container, Row, Col, Text, Icon, Checkbox, MultiSelectionGroup, Dropdown, Tile, Button, TextInput } from 'pp-react';
 
 function SideBar() {
     return (
-        <div className={'box sidebar'}>
+        <Col sm={2} className={'box sidebar'}>
             <ul>
                 {routs.map(({ path, title }, index) => {
-                    return <li key={index}><Link to={path} className={'tip-nav'}> {title} </Link></li>
+                    return <li key={index}><Link to={path} className={`tip-nav ${index === 0 ? '' : 'isDisabled'}`}> {title} </Link></li>
                 })
                 }
             </ul>
-        </div>
+        </Col>
     )
 }
 

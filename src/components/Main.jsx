@@ -4,13 +4,16 @@ import SideBar from './SideBar';
 import Content from './Content';
 import View from './View';
 
+import { Container, Row } from 'pp-react';
+
+
 
 function Main(props) {
     return (
-       <div className={'main'}>
+       <Row className={'main'}>
           <SideBar />
           <Content data={props.data}/>
-       </div>
+       </Row>
     )
 }
 
