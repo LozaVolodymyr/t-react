@@ -28,10 +28,12 @@ function setupPPH() {
         pphwebsdk.Setup.isSetupComplete()
         .then(function () {
           document.getElementById('setupButton').classList.add('pp-link__done');
+          document.getElementById('setupPPH').classList.add('pp-link__done');
+          document.getElementById('takePayments').classList.remove('isDisabled');
+          document.getElementById('takePayments').classList.remove('isDisabled');
         }).catch(function (err) {
           pphwebsdk.Setup.startUIFlow(function (err) {
             document.getElementById('setupButton').classList.remove('pp-link__err');
-            document.getElementById('setupButton').classList.add('pp-link__done');
           });
           document.getElementById('setupButton').classList.add('pp-link__err');
         });

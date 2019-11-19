@@ -151,6 +151,7 @@ body {
   }
   .sidebar-right {
     background: black;
+    font-size: 18px;
     color: white;
     height: 100%;
     padding-top: 20px;
@@ -187,4 +188,8 @@ ul {
     opacity: 0.5;
     text-decoration: none;
     pointer-events: none;
+  }
+
+  .ppvx_tile{
+    padding: 0 !important;
   }

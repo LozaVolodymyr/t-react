@@ -2,12 +2,13 @@ import React from "react";
 import { Link } from 'react-router-dom';
 import { Container, Row, Col, Text, Icon, Checkbox, MultiSelectionGroup, Dropdown, Tile, Button, TextInput } from 'pp-react';
 
+
 function SideBar() {
     return (
         <Col sm={2} className={'box sidebar'}>
             <ul>
-                {routs.map(({ path, title }, index) => {
-                    return <li key={index}><Link to={path} className={`tip-nav ${index === 0 ? '' : 'isDisabled'}`}> {title} </Link></li>
+                {routs.map(({ path, title, id }, index) => {
+                    return <li key={index}><Link to={path} id={id} className={`tip-nav ${index === 0 ? '' : 'isDisabled'}`}> {title} </Link></li>
                 })
                 }
             </ul>
@@ -19,23 +20,28 @@ function SideBar() {
 const routs = [
     {
         path: '/',
-        title: 'Setup PPH'
+        title: 'Setup PPH',
+        id: 'setupPPH'
     },
     {
         path: '/take-payments',
-        title: 'Take Payments'
+        title: 'Take Payments',
+        id: 'takePayments'
     },
     {
         path: '/merchant-indentity',
-        title: 'Merchant Indentity'
+        title: 'Merchant Indentity',
+        id: 'merchantIndentity'
     },
     {
         path: '/payment-options',
-        title: 'Payment Options'
+        title: 'Payment Options',
+        id: 'paymentOptions'
     },
     {
         path: '/subsribe-events',
-        title: 'Subsribe Events'
+        title: 'Subsribe Events',
+        id: 'subsribeEvents'
     }
 ]
 

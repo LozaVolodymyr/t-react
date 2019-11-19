@@ -34,25 +34,14 @@ export default {
                 ]
             },
         ],
-            identity: [
-                {
-                    key: 'environment', label: 'Select environment to run on', value: 'fake',
-                },
-                {
-                    key: 'access_token', label: 'Access token to authorize payments with', value: '@access_token',
-                },
-                {
-                    key: 'client_id', label: 'Client ID to authorize payments with', value: '@client_id',
-                },
-                {
-                    key: 'client_secret', label: 'Client Secret to authorize payments with', value: '@client_secret',
-                },
-                {
-                    key: 'refresh_url', label: 'Refresh url to refresh access token on expiry', value: '@refresh_url',
-                },
-            ],
-                checkboxes:
-        [
+            identity: { 
+                environment: { label: 'Select environment to run on', value: 'mock' },
+                accessToken: { label: 'Access token to authorize payments with', value: '@access_token'},
+                refreshUrl: { label: 'Refresh url to refresh access token on expiry', value: '@refresh_url' },
+                clientId: { label: 'Client ID to authorize payments with', value: '@client_id' },
+                clientSecret: { label: 'Client Secret to authorize payments with', value: '@client_secret' },
+            },
+            checkboxes:[
             {
                 id: 'quickChip',
                 text: 'Quick Chip',

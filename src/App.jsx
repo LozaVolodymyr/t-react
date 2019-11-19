@@ -6,7 +6,6 @@ import { Container, Row, Col, Text, Icon, Checkbox, MultiSelectionGroup, Dropdow
 
 import "./App.css";
 
-
 import Header from './components/Header';
 import Main from './components/Main';
 
