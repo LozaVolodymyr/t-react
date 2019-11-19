@@ -9,14 +9,9 @@ import View from '../components/View'
 class Indentity extends React.Component {
   constructor(props){
     super(props);
-
       this.state = { 
         identity: props.identity
       }
-      this.tempalte = `const identity = pphwebsdk.Identity
-            .create({${props.identity.accessToken.value}})           
-            .environment({${props.identity.environment.value}})
-            .refreshUrl({${props.identity.refreshUrl.value}});`
   }
 
   onChange(event) {
@@ -25,8 +20,6 @@ class Indentity extends React.Component {
     updateProperty.identity[name]['value'] = value;
     this.setState({ updateProperty });
     this.forceUpdate();
-
-
   }
 
 

@@ -33,7 +33,7 @@ class Content extends React.Component {
                     <Route exact path='/' component={Setup} />
                     {/* <Route path='/' render={() => <Setup identity={this.props.data.identity} />} /> */}
                     <Route path='/merchant-indentity' render={() => <Indentity identity={this.props.data.identity} />} />
-                    <Route path='/take-payments' render={() => <Payments identity={this.props.data.identity} view={this.state.view} updateView={this.updateView} />} />
+                    <Route path='/take-payments' render={() => <Payments payment={this.props.data.payment} view={this.state.view} updateView={this.updateView} />} />
                     <Route path='/payment-options' render={() => <Options orderOptions={this.props.data.orderOptions} />} />
                     <Route path='/subsribe-events' render={() => <Events identity={this.props.data.identity} />} />
                     <Redirect to="/" />
