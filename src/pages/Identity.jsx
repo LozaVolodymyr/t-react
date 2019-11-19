@@ -1,17 +1,16 @@
 import React from "react";
-import { Container, Row, Col, Text, Icon, Checkbox, MultiSelectionGroup, Dropdown, Tile, Button, TextInput } from 'pp-react';
-
-import IndentityView from './IndentityView'
+import { Row, Col, Icon, Tile, Button, TextInput } from 'pp-react';
 
 import View from '../components/View'
 
 
-class Indentity extends React.Component {
-  constructor(props){
+class Identity extends React.Component {
+  constructor(props) {
     super(props);
-      this.state = { 
-        identity: props.identity
-      }
+    this.state = {
+      identity: props.identity,
+      template: props.template
+    }
   }
 
   onChange(event) {
@@ -37,20 +36,21 @@ class Indentity extends React.Component {
                   label={key}
                   helperText={identity[key].label}
                   rightIcon={<Icon size="xs" name="info-alt" />}
-                onChange={this.onChange.bind(this)}
+                  onChange={this.onChange.bind(this)}
                 />
               </Tile.Content>
             </Tile>
           })}
-          {/* <Button onClick={this.props.updateView}>ADD EVENT</Button> */}
+          <Button size="lg" id={'setupButton'} className={'pp-link'} onClick={(event) => { console.log('next') }} >Next</Button>
         </Col>
 
         <Col>
-          <IndentityView identity={this.state.identity} tempalte= {this.tempalte } />
+          <View template={this.state.template} data={this.state.identity} />
+
         </Col>
       </Row>
     )
   }
 }
 
-export default Indentity;
+export default Identity;

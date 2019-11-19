@@ -45,57 +45,66 @@ export default {
             type: {
                 label: 'Payment Types', helperText: 'Choose the payment type',
             },
+            active: {
+                value: 'pt_card',
+                text: 'CARD'
+            },
             options: [
                 {
-                    label: 'Card', value: 'pt_card', text: 'CARD',
+                    label: 'Card', value: 'pt_card', text: 'CARD', 
                 }, {
-                    label: 'Key In', value: 'pt_keyin', text: 'KEYIN',
+                    label: 'Key In', value: 'pt_keyin', text: 'KEYIN', defaultValue: true
                 }, {
                     label: 'Check', value: 'pt_check', text: 'CHECK',
                 }, {
                     label: 'Cash', value: 'pt_cash', text: 'CASH',
                 }
             ],
-            checkboxes: [
+            checkboxes: {
+                quickChip: 
                 {
-                    id: 'quickChip',
+                    state: true,
                     text: 'Quick Chip',
                     commentString: '// Configure for Quick Chip',
                     api: (configObject) => `${configObject}.useQuickChip();`
                 },
+                skipReceipt:
                 {
-                    id: 'skipReceipt',
+                    state: true,
                     text: 'Skip Receipt',
                     commentString: '// Configure for Skip Receipt',
                     api: (configObject) => `${configObject}.tag(\'skipReceipt\');`
                 },
+                showPromptInReader: 
                 {
-                    id: 'showPromptInReader',
+                    state: true,
                     text: 'Show Prompt in Reader',
                     commentString: '// Configure for showing prompts in reader',
                     api: (configObject) => `${configObject}.showPromptInReader();`
                 },
+                showPromptInApp:
                 {
-                    id: 'showPromptInApp',
+                    state: true,
                     text: 'Show Prompt in App',
                     commentString: '// Configure for showing prompts in App',
                     api: (configObject) => `${configObject}.showPromptInApp();`
                 },
+                fakeapi:
                 {
-                    id: 'fakeapi',
+                    state: true,
                     text: 'Fake API Response',
                     commentString: '// Configure for Fake API Responses',
                     api: (configObject) => `${configObject}.useFakeAPIServer();`
                 },
-            ],
-            orderOptions: [
-                {
-                    key: 'amount', label: 'Choose item amount', value: '@amount',
+            },
+            orderOptions: {
+                amount: {
+                    name: 'amount', label: 'Choose item amount', value: '@amount'
                 },
-                {
-                    key: 'tip', label: 'Choose tip for order', value: '@tip',
+                tip: {
+                    name: 'tip', label: 'Choose tip for order', value: '@tip',
                 }
-            ]
+            }
         },
         selectionGroup: [
             {

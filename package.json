@@ -14,6 +14,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "handlebars": "^4.5.3",
+    "handlebars-react": "0.0.16",
     "lodash": "^4.17.15",
     "pp-react": "^4.2.3",
     "promise": "^8.0.3",

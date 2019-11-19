@@ -24,14 +24,14 @@ const routs = [
         id: 'setupPPH'
     },
     {
+        path: '/merchant-identity',
+        title: 'Merchant Identity',
+        id: 'merchantIdentity'
+    },
+    {
         path: '/take-payments',
         title: 'Take Payments',
         id: 'takePayments'
-    },
-    {
-        path: '/merchant-indentity',
-        title: 'Merchant Indentity',
-        id: 'merchantIndentity'
     },
     {
         path: '/payment-options',
@@ -47,13 +47,3 @@ const routs = [
 
 
 export default SideBar;
-
-
-
-// <div>
-// <Route exact path='/' component={Home} />
-// <Route path='/take-payments' component={Payments} />
-// <Route path='/merchant-indentity' component={Indentity} />
-// <Route path='/payment-options' component={Options} />
-// <Route path='/subsribe-events' component={Events} />
-// </div>

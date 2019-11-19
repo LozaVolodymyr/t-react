@@ -1,31 +1,37 @@
 import React from "react";
 import { Container, Row, Col, Text, Icon, Checkbox, MultiSelectionGroup, Dropdown, Tile, Button, TextInput } from 'pp-react';
-
-import PaymentView from './PaymentView'
+import View from '../components/View'
 
 
 class Payments extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 'CARD',
-      payment: props.payment
+      payment: props.payment,
+      template: props.template
     }
   }
 
 
   onChangeDropDown(event) {
-    this.state.value = event.target.value;
+    const { name, value } = event.target;
+    const { value: checkBoxValue, text } = this.state.payment.options.find(el => el.value ===  value);
+    this.state.payment.active = {
+      value: checkBoxValue,
+      text
+    };
     this.setState(this.state);
   }
 
   onCheckboxChange(event) {
-    this.state.value = event.target.value;
+    const { name, value } = event.target;
+    this.state.payment.checkboxes[name].state = !this.state.payment.checkboxes[name].state;
     this.setState(this.state);
   }
 
-  orderOptionsTextChange() {
-    this.state.value = event.target.value;
+  orderOptionsTextChange(event) {
+    const { name, value } = event.target;
+    this.state.payment.orderOptions[name].value = value;
     this.setState(this.state);
   }
 
@@ -38,42 +44,47 @@ class Payments extends React.Component {
           <Tile.Content>
             <Dropdown
               label={type.label}
-              options={options}
-              value={this.state.value}
+              options={this.state.payment.options}
+              value={this.state.payment.active.value}
               onChange={this.onChangeDropDown.bind(this)}
             />
           </Tile.Content>
+
           <Tile divider>
             <Tile.Header size={'xl2'}>Payment Options</Tile.Header>
             <Tile.Content>
-              {checkboxes
-                .map((checkbox, index) => <Checkbox
+              {Object.keys(checkboxes)
+                .map((key, index) => 
+                <Checkbox
+                  checked={checkboxes[key].state}
                   key={index}
-                  label={checkbox.text}
-                  name={checkbox.id}
-                  id={checkbox.id}
+                  label={checkboxes[key].text}
+                  name={key}
+                  id={key}
                   onChange={this.onCheckboxChange.bind(this)}
                 />
                 )}
             </Tile.Content>
           </Tile>
-          { orderOptions.map((element, index) => {
-            return <Tile divider key={index}>
+          { Object.keys(orderOptions).map((key, index) => {
+            return <Tile key={index}>
               <Tile.Content>
                 <TextInput
-                  name={element.key}
-                  value={element.value}
-                  label={element.key}
-                  helperText={element.label}
+                  name={key}
+                  value={orderOptions[key].value}
+                  label={key}
+                  helperText={orderOptions[key].label}
                   rightIcon={<Icon size="xs" name="info-alt" />}
                   onChange={this.orderOptionsTextChange.bind(this)}
                 />
               </Tile.Content>
             </Tile>
           }) }
+          <Button size="lg" id={'setupButton'} className={'pp-link'} onClick={(event) => { console.log('next') }} >Next</Button>
         </Col>
+        
         <Col>
-          <PaymentView identity={this.state.payment} />
+          <View template={this.state.template} data={this.state.payment}/>
         </Col>
       </Row>
     )
