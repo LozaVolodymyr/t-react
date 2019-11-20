@@ -1,5 +1,5 @@
 export default {
-payment:
+payments:
 `/* Creating Payment Configuration */
 const paymentConfig = pphwebsdk
 .PaymentConfiguration.create();

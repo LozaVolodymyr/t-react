@@ -1,7 +1,8 @@
 import React from "react";
-import { Row, Col, Icon, Tile, Button, TextInput } from 'pp-react';
+import { Row, Col, Icon, Tile, TextInput } from 'pp-react';
 
 import View from '../components/View'
+import NextButton from '../components/NextButton'
 
 
 class Identity extends React.Component {
@@ -41,7 +42,8 @@ class Identity extends React.Component {
               </Tile.Content>
             </Tile>
           })}
-          <Button size="lg" id={'setupButton'} className={'pp-link'} onClick={(event) => { console.log('next') }} >Next</Button>
+          
+          <NextButton name={'identity'} history={this.props.history} next={this.props.next}/>
         </Col>
 
         <Col>
