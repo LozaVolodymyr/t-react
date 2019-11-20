@@ -65,5 +65,23 @@ pphwebsdk.Setup
 pphwebsdk.Setup.startUIFlow(function(err) {
    console.log('done with setup');
 });
- `
+ `,
+events:
+`/* Creating Payment Configuration */
+const paymentConfig = pphwebsdk
+.PaymentConfiguration.create();
+
+/* Configure for Mock API Responses */ 
+paymentConfig
+.onPaymentSuccess(function(txnRecord) {
+    console.log('txnRecord', txnRecord);
+})
+.onMediatorAppConnectFailure(function(err) {
+    console.log('err', err);
+
+})
+.onPaymentFailure(function(err) {
+    console.log('err', err);
+})
+`
 }

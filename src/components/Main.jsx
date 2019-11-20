@@ -31,14 +31,6 @@ class Main extends React.Component {
                id: 'takePayments',
                isDisabled: true
             },
-            options:
-            {
-               path: '/payment-options',
-               component: 'Options',
-               title: 'Payment Options',
-               id: 'paymentOptions',
-               isDisabled: true
-            },
             events:
             {
                path: '/subsribe-events',
@@ -46,7 +38,15 @@ class Main extends React.Component {
                title: 'Subsribe Events',
                id: 'subsribeEvents',
                isDisabled: true
-            }
+            },
+            complete:
+            {
+               path: '/complete',
+               component: 'Complete',
+               title: 'Complete Transaction',
+               id: 'completeTransaction',
+               isDisabled: true
+            },
          }
       }
       this.next = this.next.bind(this);

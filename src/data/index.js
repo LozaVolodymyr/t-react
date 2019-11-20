@@ -106,57 +106,71 @@ export default {
                 }
             }
         },
-        selectionGroup: [
+        selectionGroup: {
+            onPaymentSuccess:
             {
+                state: true,
                 label: 'Payment Success',
                 name: 'onPaymentSuccess',
                 id: 'eh_ps',
                 alertText: '\'success\'',
                 functionParam: 'txnRecord'
             },
+            onPaymentFailure:
             {
+                state: true,
                 label: 'Payment Failure',
                 name: 'onPaymentFailure',
                 id: 'eh_pf',
                 functionParam: 'err',
                 alertText: '\'failed with\' + err',
             },
+            onMerchantInitializeSuccess:
             {
+                state: true,
                 label: 'Merchant Init Success',
                 name: 'onMerchantInitializeSuccess',
                 id: 'eh_mis',
                 functionParam: 'merchant',
                 alertText: '\'merchant logged in!\'',
             },
+            onMerchantInitializeSuccess:
             {
+                state: true,
                 label: 'Merchant Init Failure',
-                name: 'onMerchantInitializeFailure',
+                name: 'onMerchantInitializeSuccess',
                 id: 'eh_mif',
                 functionParam: 'err',
                 alertText: '\'Merchant Init failed with\' + err',
             },
+            onConnectReaderSuccess:
             {
+                state: true,
                 label: 'Reader Connection Success',
                 name: 'onConnectReaderSuccess',
                 id: 'eh_crs',
                 functionParam: 'reader',
                 alertText: '\'Connected with\' + reader',
             },
+            onConnectReaderFailure:
             {
+                state: true,
                 label: 'Reader Connection Failure',
                 name: 'onConnectReaderFailure',
                 id: 'eh_crf',
                 functionParam: 'err',
                 alertText: '\'reader connection failed with\' + err',
             },
+            NoDevicesFound:
             {
+                state: true,
                 label: 'No Devices Found',
                 name: 'NoDevicesFound',
                 id: 'eh_ndf',
                 functionParam: '',
                 alertText: '\'No Devices Found\'',
             },
-        ],
+        },
         selections:
             [
                 /*{

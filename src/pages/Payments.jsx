@@ -1,5 +1,7 @@
 import React from "react";
-import { Container, Row, Col, Text, Icon, Checkbox, MultiSelectionGroup, Dropdown, Tile, Button, TextInput } from 'pp-react';
+import {  Row, Col,  Icon, Checkbox, Dropdown, Tile, TextInput } from 'pp-react';
+
+import NextButton from '../components/NextButton'
 import View from '../components/View'
 
 
@@ -10,6 +12,8 @@ class Payments extends React.Component {
       payment: props.payment,
       template: props.template
     }
+
+    console.log('Payments', props)
   }
 
 
@@ -36,7 +40,7 @@ class Payments extends React.Component {
   }
 
   render() {
-    const { type, options, checkboxes, orderOptions } = this.state.payment;
+    const { type, checkboxes, orderOptions } = this.state.payment;
     return (
       <Row>
         <Col className={'box-content'}>
@@ -80,7 +84,7 @@ class Payments extends React.Component {
               </Tile.Content>
             </Tile>
           }) }
-          <Button size="lg" id={'setupButton'} className={'pp-link'} onClick={(event) => { console.log('next') }} >Next</Button>
+          <NextButton name={'payments'} history={this.props.history} next={this.props.next}/>
         </Col>
         
         <Col>

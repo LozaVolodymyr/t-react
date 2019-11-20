@@ -4,7 +4,6 @@ import { Col } from 'pp-react';
 
 import Setup from '../pages/Setup'
 import Identity from '../pages/Identity'
-import Options from '../pages/Options'
 import Events from '../pages/Events'
 import Payments from '../pages/Payments'
 
@@ -38,17 +37,13 @@ class Content extends React.Component {
                     {...routeProps}
                     payment={this.props.data.payment} 
                     next={this.props.next}
-                    template={templates.payment} />} />
-                    <Route path={this.routes.options.path} render={routeProps => 
-                    <Options 
-                    {...routeProps}
-                    next={this.props.next}
-                    orderOptions={this.props.data.orderOptions} />} />
+                    template={templates.payments} />} />
                     <Route path={this.routes.events.path} render={routeProps => 
                     <Events 
                     {...routeProps}
                     next={this.props.next}
-                    identity={this.props.data.identity} />} />
+                    template={templates.events}
+                    selectionGroup={this.props.data.selectionGroup} />} />
                     <Redirect to="/" />
                 </Switch>
             </Col>
