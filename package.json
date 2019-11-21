@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --mode development"
+    "start": "webpack-dev-server --mode development",
+    "server": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -14,9 +15,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
+    "express-favicon": "^2.0.1",
     "handlebars": "^4.5.3",
     "handlebars-react": "0.0.16",
     "lodash": "^4.17.15",
+    "path": "^0.12.7",
     "pp-react": "^4.2.3",
     "promise": "^8.0.3",
     "react": "^16.8.6",
