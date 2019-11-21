@@ -67,21 +67,47 @@ pphwebsdk.Setup.startUIFlow(function(err) {
 });
  `,
 events:
-`/* Creating Payment Configuration */
-const paymentConfig = pphwebsdk
-.PaymentConfiguration.create();
-
-/* Configure for Mock API Responses */ 
+`/* Configure for Mock API Responses */ 
 paymentConfig
+{{#if onPaymentSuccess.state}}
 .onPaymentSuccess(function(txnRecord) {
     console.log('txnRecord', txnRecord);
 })
-.onMediatorAppConnectFailure(function(err) {
-    console.log('err', err);
-
-})
+{{/if}}
+{{#if onPaymentFailure.state}}
 .onPaymentFailure(function(err) {
-    console.log('err', err);
+    console.log('error', err);
 })
-`
+{{/if}}
+{{#if onMerchantInitializeSuccess.state}}
+.onMerchantInitializeSuccess(function(merchant) {
+    console.log('Logged in as', merchant);
+})
+{{/if}}
+{{#if onMerchantInitializeFailure.state}}
+.onMerchantInitializeFailure(function(err) {
+    console.log('error', err);
+})
+{{/if}}
+{{#if onConnectReaderSuccess.state}}
+.onConnectReaderSuccess(function(details) {
+    console.log('reader connected successfully', details)
+})
+{{/if}}
+{{#if onConnectReaderFailure.state}}
+.onConnectReaderFailure(function(err) {
+    console.log('Couldn\'t connect to device: ' + err);
+})
+{{/if}}
+{{#if NoDevicesFound.state}}
+.NoDevicesFound(function() {
+    console.log('No devices to connect');
+})
+{{/if}}`
 }
+
+
+
+
+
+  

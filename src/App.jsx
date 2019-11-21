@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { hot } from "react-hot-loader";
 import { Container, Row, Col, Text, Icon, Checkbox, MultiSelectionGroup, Dropdown, Tile, Button, TextInput } from 'pp-react';
 
-import "./App.css";
+import "./style/style.css";
 
 import Header from './components/Header';
 import Main from './components/Main';

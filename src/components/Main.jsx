@@ -4,67 +4,28 @@ import Content from './Content';
 
 import { Row } from 'pp-react';
 
-
+import routes from '../data/routes'
 
 class Main extends React.Component {
    constructor(props) {
       super(props)
       this.state = {
-         routes: {
-            setup: {
-               path: '/',
-               title: 'Setup PPH',
-               id: 'setupPPH',
-               isDisabled: false
-            },
-            identity:
-            {
-               path: '/merchant-identity',
-               title: 'Merchant Identity',
-               id: 'merchantIdentity',
-               isDisabled: true
-            },
-            payments:
-            {
-               path: '/take-payments',
-               title: 'Take Payments',
-               id: 'takePayments',
-               isDisabled: true
-            },
-            events:
-            {
-               path: '/subsribe-events',
-               component: 'Events',
-               title: 'Subsribe Events',
-               id: 'subsribeEvents',
-               isDisabled: true
-            },
-            complete:
-            {
-               path: '/complete',
-               component: 'Complete',
-               title: 'Complete Transaction',
-               id: 'completeTransaction',
-               isDisabled: true
-            },
-         }
+         routes: routes
       }
       this.next = this.next.bind(this);
    }
    
    next({ event, history }){
       const { name } = event.target;
-      console.log('name==>', name)
-      console.log('history==>', history)
       const currentStep = this.state.routes[name];
       const nextKey = this.nextKey(this.state.routes, name);
       this.state.routes[nextKey].isDisabled = false;
       this.setState(this.state);
       history.push(this.state.routes[nextKey].path);
 
+
+      // Style for NavsBars
       document.getElementById(currentStep.id).classList.add('pp-link__done');
-
-
       // ADD PROGRESS BAR LOGIC
       
    }

@@ -11,14 +11,14 @@ class Events extends React.Component {
     super(props);
     this.state = {
       events: props.selectionGroup,
-      template: props.template
+      template: props.template,
+      component: 'events'
     }
-    console.log('Events==>', props)
   }
 
   onCheckboxChange(event) {
     const { name, value } = event.target;
-    this.state.events[name].state = !this.state.payment.checkboxes[name].state;
+    this.state.events[name].state = !this.state.events[name].state;
     this.setState(this.state);
   }
 
@@ -44,11 +44,15 @@ class Events extends React.Component {
                 )}
             </Tile.Content>
           </Tile>
-          <NextButton name={'events'} history={this.props.history} next={this.props.next}/>
+          <NextButton name={this.state.component} history={this.props.history} next={this.props.next}/>
         </Col>
 
         <Col>
-          <View template={this.state.template} data={this.state.events}/>
+          <View
+          codeGenerator={this.props.codeGenerator}
+          component={this.state.component}
+          template={this.state.template} 
+          data={this.state.events}/>
         </Col>
       </Row>
     )
@@ -56,19 +60,3 @@ class Events extends React.Component {
 }
 
 export default Events;
-
-
-
-// renderSelectionGroup() {
-//   const self = this;
-//   const { selectionGroup } = this.state.data;
-//   return <MultiSelectionGroup
-//     label="Select event handlers"
-//     helperText="select all that are required"
-//     align="justify"
-//     options={
-//       selectionGroup
-//     }
-//     onChange={self.checkSelectionGroup.bind(self)}
-//   />
-// }

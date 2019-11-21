@@ -10,10 +10,9 @@ class Payments extends React.Component {
     super(props);
     this.state = {
       payment: props.payment,
-      template: props.template
+      template: props.template,
+      component: 'payments'
     }
-
-    console.log('Payments', props)
   }
 
 
@@ -29,6 +28,7 @@ class Payments extends React.Component {
 
   onCheckboxChange(event) {
     const { name, value } = event.target;
+    console.log('1')
     this.state.payment.checkboxes[name].state = !this.state.payment.checkboxes[name].state;
     this.setState(this.state);
   }
@@ -84,16 +84,19 @@ class Payments extends React.Component {
               </Tile.Content>
             </Tile>
           }) }
-          <NextButton name={'payments'} history={this.props.history} next={this.props.next}/>
+          <NextButton name={this.state.component} history={this.props.history} next={this.props.next}/>
         </Col>
         
         <Col>
-          <View template={this.state.template} data={this.state.payment}/>
+          <View 
+          component={this.state.component}
+          codeGenerator={this.props.codeGenerator}
+          template={this.state.template} 
+          data={this.state.payment}/>
         </Col>
       </Row>
     )
   };
-
 }
 
 export default Payments;

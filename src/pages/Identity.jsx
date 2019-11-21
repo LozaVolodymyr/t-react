@@ -10,7 +10,8 @@ class Identity extends React.Component {
     super(props);
     this.state = {
       identity: props.identity,
-      template: props.template
+      template: props.template,
+      component: 'identity'
     }
   }
 
@@ -43,12 +44,15 @@ class Identity extends React.Component {
             </Tile>
           })}
           
-          <NextButton name={'identity'} history={this.props.history} next={this.props.next}/>
+          <NextButton name={this.state.component} history={this.props.history} next={this.props.next}/>
         </Col>
 
         <Col>
-          <View template={this.state.template} data={this.state.identity} />
-
+        <View 
+          component={this.state.component}
+          codeGenerator={this.props.codeGenerator}
+          template={this.state.template} 
+          data={this.state.identity}/>
         </Col>
       </Row>
     )

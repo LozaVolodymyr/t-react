@@ -193,3 +193,24 @@ ul {
   .ppvx_tile{
     padding: 0 !important;
   }
+
+  .copyToClipboard{
+    position: absolute;
+    right: 30px;
+  }
+
+  .copyToClipboard:hover{
+    cursor: pointer;
+  }
+
+  .donwloadButton{
+    position: absolute;
+    right: 30px;
+    top: 45px;
+  }
+
+  .donwloadButton:hover{
+    cursor: pointer;
+  }
+
+  

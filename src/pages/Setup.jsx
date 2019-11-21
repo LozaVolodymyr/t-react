@@ -10,7 +10,8 @@ class Setup extends React.Component {
     super(props)
     console.log('template props==>', props)
     this.state = {
-      template: props.template
+      template: props.template,
+      component: 'setup'
     }
     this.next = props.next;
   }
@@ -50,7 +51,10 @@ class Setup extends React.Component {
           </Row>
         </Col>
         <Col>
-          <View template={this.state.template} />
+        <View 
+          component={this.state.component}
+          codeGenerator={this.props.codeGenerator}
+          template={this.state.template} />
         </Col>
       </Row>
     )

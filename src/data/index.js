@@ -134,7 +134,7 @@ export default {
                 functionParam: 'merchant',
                 alertText: '\'merchant logged in!\'',
             },
-            onMerchantInitializeSuccess:
+            onMerchantInitializeFailure:
             {
                 state: true,
                 label: 'Merchant Init Failure',
