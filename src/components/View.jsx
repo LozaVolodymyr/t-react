@@ -34,6 +34,9 @@ class View extends React.Component {
                 { this.props.donwloadFile ? <Icon className={'donwloadButton'} size="xs" name="download" 
                      onClick={(event) => { this.props.donwloadFile({ event }) } } /> : '' }
 
+                { this.props.runCode ? <Icon className={'runCode'} size="xs" name="play" 
+                     onClick={(event) => { this.props.runCode({ event }) } }> </Icon> : '' }
+
                 <Highlight language="javascript">
                     {this.compiledTemplate}
                 </Highlight>

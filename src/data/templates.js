@@ -3,7 +3,8 @@ payments:
 `/* Creating Payment Configuration */
 const paymentConfig = pphwebsdk
 .PaymentConfiguration.create();
-
+paymentConfig.reader();
+console.log('paymentConfig', paymentConfig);
 {{#if checkboxes.quickChip.state}}
 /* Configure for Quick Chip */ 
 paymentConfig.useQuickChip();
@@ -35,7 +36,8 @@ order
 .item('test-item')
 .price({{orderOptions.amount.value}})
 .quantity(1);
-.tip({{orderOptions.tip.value}});
+
+order.tip({{orderOptions.tip.value}});
 
 /* Making Payments */
 pphwebsdk.Payment
@@ -51,6 +53,7 @@ identity:
 setup:
 `/* Returns a Promise of whether 
 the setup is complete or not */
+console.log('START==>')
 pphwebsdk.Setup
   .isSetupComplete()
   .then(function() {
@@ -68,7 +71,7 @@ pphwebsdk.Setup.startUIFlow(function(err) {
  `,
 events:
 `/* Configure for Mock API Responses */ 
-paymentConfig
+paymentConfig.subscribeOnEvent
 {{#if onPaymentSuccess.state}}
 .onPaymentSuccess(function(txnRecord) {
     console.log('txnRecord', txnRecord);
@@ -96,7 +99,7 @@ paymentConfig
 {{/if}}
 {{#if onConnectReaderFailure.state}}
 .onConnectReaderFailure(function(err) {
-    console.log('Couldn\'t connect to device: ' + err);
+    console.log('Could not connect to device: ' + err);
 })
 {{/if}}
 {{#if NoDevicesFound.state}}

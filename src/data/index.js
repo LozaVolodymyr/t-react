@@ -35,11 +35,11 @@ export default {
             },
         ],
         identity: {
-            environment: { label: 'Select environment to run on', value: 'mock' },
-            accessToken: { label: 'Access token to authorize payments with', value: '@access_token' },
-            refreshUrl: { label: 'Refresh url to refresh access token on expiry', value: '@refresh_url' },
-            clientId: { label: 'Client ID to authorize payments with', value: '@client_id' },
-            clientSecret: { label: 'Client Secret to authorize payments with', value: '@client_secret' },
+            environment: { label: 'Select environment to run on', value: '"fake"' },
+            accessToken: { label: 'Access token to authorize payments with', value: "'@accesstoken'" },
+            refreshUrl: { label: 'Refresh url to refresh access token on expiry', value: "'@efresh_url'" },
+            clientId: { label: 'Client ID to authorize payments with', value: "'@client_id'" },
+            clientSecret: { label: 'Client Secret to authorize payments with', value: "'@client_secret'" },
         },
         payment: {
             type: {
@@ -99,10 +99,10 @@ export default {
             },
             orderOptions: {
                 amount: {
-                    name: 'amount', label: 'Choose item amount', value: '@amount'
+                    name: 'amount', label: 'Choose item amount', value: '2'
                 },
                 tip: {
-                    name: 'tip', label: 'Choose tip for order', value: '@tip',
+                    name: 'tip', label: 'Choose tip for order', value: '1',
                 }
             }
         },

@@ -6,17 +6,20 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server --mode development",
-    "server": "node server.js"
+    "server": "node server.js",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
     "url": "git@github.paypal.com:srsingeetham/paypal-here-sdk-web-distribution.git"
   },
+  "homepage": "https://github.paypal.com/pages/vloza/pph-react-sample-app",
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
     "express-favicon": "^2.0.1",
+    "gh-pages": "^2.1.1",
     "handlebars": "^4.5.3",
     "handlebars-react": "0.0.16",
     "lodash": "^4.17.15",

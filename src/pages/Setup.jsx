@@ -37,9 +37,9 @@ class Setup extends React.Component {
     return (
       <Row>
         <Col className={'box-content'}>
-          <h1>Setting up PPH Web SDK</h1>
+          <h1>Setting up PayPal Here Web SDK</h1>
           <Text>
-            This is a one time setup to install the supporting web interface app required for PPH Web SDK
+            This is a one time setup to install the supporting web interface app required for PayPal Web SDK
             </Text>
           <Row>
             <Col>
