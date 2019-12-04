@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/pages/vloza/pph-react-sample-app/static/css/main.ddd0aaef.chunk.css",
+    "main.js": "/pages/vloza/pph-react-sample-app/static/js/main.487b58a5.chunk.js",
+    "main.js.map": "/pages/vloza/pph-react-sample-app/static/js/main.487b58a5.chunk.js.map",
+    "runtime-main.js": "/pages/vloza/pph-react-sample-app/static/js/runtime-main.90e99b01.js",
+    "runtime-main.js.map": "/pages/vloza/pph-react-sample-app/static/js/runtime-main.90e99b01.js.map",
+    "static/css/2.665f3fd3.chunk.css": "/pages/vloza/pph-react-sample-app/static/css/2.665f3fd3.chunk.css",
+    "static/js/2.5254609f.chunk.js": "/pages/vloza/pph-react-sample-app/static/js/2.5254609f.chunk.js",
+    "static/js/2.5254609f.chunk.js.map": "/pages/vloza/pph-react-sample-app/static/js/2.5254609f.chunk.js.map",
+    "index.html": "/pages/vloza/pph-react-sample-app/index.html",
+    "precache-manifest.cd141f8f1a08886bfbf6ffb76cc4e5a5.js": "/pages/vloza/pph-react-sample-app/precache-manifest.cd141f8f1a08886bfbf6ffb76cc4e5a5.js",
+    "service-worker.js": "/pages/vloza/pph-react-sample-app/service-worker.js",
+    "static/css/2.665f3fd3.chunk.css.map": "/pages/vloza/pph-react-sample-app/static/css/2.665f3fd3.chunk.css.map",
+    "static/css/main.ddd0aaef.chunk.css.map": "/pages/vloza/pph-react-sample-app/static/css/main.ddd0aaef.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.90e99b01.js",
+    "static/css/2.665f3fd3.chunk.css",
+    "static/js/2.5254609f.chunk.js",
+    "static/css/main.ddd0aaef.chunk.css",
+    "static/js/main.487b58a5.chunk.js"
+  ]
+}
